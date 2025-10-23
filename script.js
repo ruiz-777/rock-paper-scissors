@@ -29,7 +29,13 @@ console.log ("Computer chooses " + getComputerChoice(x));
 
 let userOption = prompt("Choose an option between Rock, Paper or Scissor.","Choose an option");
 
-console.log ("User chooses " + userOption);
+// 2. Making the userOption case insensitive. Turning the fist letter uppercase and the rest of the word lower case
+
+function capitalize (userOption) {
+    return userOption.charAt(0).toUpperCase() + userOption.slice(1).toLowerCase();
+}
+
+console.log ("User chooses " + capitalize (userOption));
 
 // SCORE
 
@@ -60,4 +66,31 @@ function playRound (humanChoice, computerChoice) {
     }
 }
 
-console.log (playRound (userOption, (getComputerChoice(x))));
+console.log (playRound (capitalize (userOption), (getComputerChoice(x))));
+
+// 3. Scoring a single round
+
+function score (winner) {
+    if (winner === "Human Wins. Rock beats Scissor" || 
+        winner === "Human Wins. Paper beats Rock" ||
+        winner === "Human Wins. Scissor beats Paper") {
+        return humanScore++;
+    } else if (
+        winner === "Computer Wins. Rock beats Scissor" || 
+        winner === "Computer Wins. Paper beats Rock" ||
+        winner === "Computer Wins. Scissor beats Paper") {
+        return computerScore++;
+
+    } else {
+        return humanScore && computerScore;
+    }
+}
+
+// console.log (score (playRound (capitalize (userOption), (getComputerChoice(x)))), humanScore, computerScore);
+
+score (playRound (capitalize (userOption), (getComputerChoice(x))));
+
+// console.log (humanScore, computerScore);
+
+
+console.log ("Human Score: " + (humanScore) + " Computer Score: " + computerScore);
